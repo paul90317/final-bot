@@ -16,7 +16,7 @@ load_dotenv()
 
 app = Flask(__name__)
 
-"""
+
 # get channel_secret and channel_access_token from your environment variable
 channel_secret = os.getenv("LINE_CHANNEL_SECRET", None)
 channel_access_token = os.getenv("LINE_CHANNEL_ACCESS_TOKEN", None)
@@ -80,7 +80,7 @@ def webhook_handler():
         send_text_message(event.reply_token, f"{event.message.text},too")
 
     return "OK"
-"""
+
 
 @app.route("/")
 def home():
