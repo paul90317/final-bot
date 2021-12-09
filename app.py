@@ -12,7 +12,7 @@ from utils import send_text_message
 load_dotenv()
 
 
-app = Flask(__name__, static_url_path="")
+app = Flask(__name__)
 
 """
 # get channel_secret and channel_access_token from your environment variable
