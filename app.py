@@ -23,10 +23,9 @@ if channel_secret is None:
     print("Specify LINE_CHANNEL_SECRET as environment variable.")
 if channel_access_token is None:
     print("Specify LINE_CHANNEL_ACCESS_TOKEN as environment variable.")
-    
+
 line_bot_api = LineBotApi(channel_access_token)
 parser = WebhookParser(channel_secret)
-
 
 @app.route("/callback", methods=["POST"])
 def callback():
@@ -54,7 +53,6 @@ def callback():
 
     return "OK"
 
-iii=0
 @app.route("/webhook", methods=["POST"])
 def webhook_handler():
     signature = request.headers["X-Line-Signature"]
@@ -84,6 +82,7 @@ def webhook_handler():
 
 @app.route("/", methods=["GET"])
 def show_fsm():
+    return "Hello world"
     return send_file("fsm.png", mimetype="image/png")
 
 
