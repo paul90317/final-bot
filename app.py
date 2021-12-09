@@ -81,7 +81,7 @@ def webhook_handler():
 """
 
 @app.route("/", methods=["GET"])
-def show_fsm():
+def home():
     return "Hello world"
     return send_file("fsm.png", mimetype="image/png")
 
