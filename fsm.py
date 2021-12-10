@@ -36,7 +36,7 @@ def on_get(**obj):
     res=client.get(obj['url'])
     uid=obj['uid']
     filename=f'temp/{uid}.html'
-    tempfiles['uid']=res.text
+    tempfiles[uid]=res.text
     return text_msg(os.path.join(os.environ.get('HOST_URL',''),filename))
 
 def on_post(**obj):
@@ -44,7 +44,7 @@ def on_post(**obj):
     res=client.post(obj['url'])
     uid=obj['uid']
     filename=f'temp/{uid}.html'
-    tempfiles['uid']=res.text
+    tempfiles[uid]=res.text
     return text_msg(os.path.join(os.environ.get('HOST_URL',''),filename))
 
 machine={
