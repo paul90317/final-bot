@@ -49,7 +49,10 @@ def handle_message(event):
     text = event.message.text
     
     state=go_next(state,text)
-    reply(enter_state(state))
+    try:
+        reply(enter_state(state))
+    except:
+        print("reply error!!!")
     if 'advance' not in machine[state]:
         state=go_next(state,'')
     return 'OK'
