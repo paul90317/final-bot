@@ -3,7 +3,7 @@ from utils import check_get
 
 from transitions.extensions.diagrams import GraphMachine
 
-with open("jsons/FSM.json","r") as f:
+with open("FSM.json","r") as f:
     m=json.load(f)
 
 m2={}
@@ -41,3 +41,5 @@ machine = GraphMachine(
     auto_transitions=False,
     show_conditions=True,
 )
+
+machine.get_graph().draw("fsm.png", prog="dot", format="png")

@@ -10,7 +10,7 @@
     "LCSeq":{
         "advance":{
             "Test":"seq-test",
-            "Back":"user"
+            "Back":"menu"
         }
     },
     "seq-test":{
@@ -23,12 +23,12 @@
         "any":"seq-out"
     },
     "seq-out":{
-        "back":"user"
+        "back":"menu"
     },
     "LCStr":{
         "advance":{
             "Test":"str-test",
-            "Back":"user"
+            "Back":"menu"
         }
     },
     "str-test":{
