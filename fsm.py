@@ -27,12 +27,12 @@ def on_ip(machine,state):
     return text_msg(res.text)
 def on_wait_url(machine,state):
     return text_msg('請輸入 url:')
-def on_get():
+def on_get(machine,state):
     global gurl
     res=client.get(gurl)
     print(res.text)
     return text_msg(res.text)
-def on_post():
+def on_post(machine,state):
     global gurl
     res=client.post(gurl)
     print(res.text)
