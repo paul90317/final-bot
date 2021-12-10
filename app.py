@@ -39,7 +39,7 @@ def callback():
     return 'OK'
 
 # 處理訊息
-state="user"
+state="menu"
 x=""
 y=""
 machine=None
