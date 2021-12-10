@@ -72,11 +72,6 @@ def handle_message(event):
 
     if machine.go_back(state)!=None:
         state=machine.go_back(state)
-        if state[3:]=='out':
-            reply(text_msg('x'))
-            reply(text_msg('y'))
-        else:
-            reply(complex_msg(state))
     return 'OK'
         
     

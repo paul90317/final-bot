@@ -55,11 +55,7 @@ def complex_msg(filelabel):
         with open(f"jsons/{filelabel}.json")as f:
             mjson=json.load(f)
     except:
-        return TemplateSendMessage(
-            template=ButtonsTemplate(
-                title='404',
-            )
-        )
+        return TextSendMessage(text=f"jsons/{filelabel}.json can't open")
     
     actions=[]
     if 'buttons' in mjson:
