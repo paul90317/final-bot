@@ -15,7 +15,7 @@ from utils import *
 from fsm import *
 
 app = Flask(__name__)
-"""
+
 load_dotenv()
 static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
 # Channel Access Token
@@ -97,17 +97,14 @@ def welcome(event):
     message = TextSendMessage(text=f'{name}歡迎加入')
     line_bot_api.reply_message(event.reply_token, message)
     return 'OK'
-"""
+
 @app.route("/")
 def hello():
-    return "Hello world"
-    #return send_file("fsm.png", mimetype="image/png")
+    return send_file("fsm.png", mimetype="image/png")
 
 import json
 if __name__ == "__main__":
-    """
     with open("jsons/FSM.json","r") as f:
         machine=myFSM(json.load(f))
-    """
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
