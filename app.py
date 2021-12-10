@@ -67,6 +67,10 @@ def handle_message(event):
     if state[-3:]=='out':
         reply(text_msg(x))
         reply(text_msg(y))
+    elif state[-1:]=='x':
+        reply(text_msg('請輸入 x:'))
+    elif state[-1:]=='y':
+        reply(text_msg('請輸入 y:'))
     else:
         try:
             reply(complex_msg(state))

@@ -76,11 +76,10 @@ def complex_msg(filelabel):
                     )
                 ]
     return TemplateSendMessage(
-        alt_text=check_get(mjson,'alt',''),
         template=ButtonsTemplate(
             thumbnail_image_url=check_get(mjson,'img_url',''),
-            title=check_get(mjson,'title',''),
-            text=check_get(mjson,'text',''),
+            title=mjson['title'],
+            text=mjson['text'],
             actions=actions
         )
     )
