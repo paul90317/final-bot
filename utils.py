@@ -76,6 +76,7 @@ def complex_msg(filelabel):
                     )
                 ]
     return TemplateSendMessage(
+        alt_text=mjson['title'],
         template=ButtonsTemplate(
             title=mjson['title'],
             text=mjson['text'],
