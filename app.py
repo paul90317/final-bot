@@ -109,4 +109,4 @@ if __name__ == "__main__":
     with open("jsons/FSM.json","r") as f:
         machine=myFSM(json.load(f))
     """
-    app.run()
+    app.run(port=int(os.getenv("PORT",5000)))
