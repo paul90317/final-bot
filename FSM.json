@@ -41,6 +41,6 @@
         "any":"str-out"
     },
     "str-out":{
-        "back":"user"
+        "back":"menu"
     }
 }
