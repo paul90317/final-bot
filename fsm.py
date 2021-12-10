@@ -87,11 +87,11 @@ machine={
         'on_enter':on_wait_url
     },
     'do-get':{
-        'on_enter':on_wait_url,
+        'on_enter':on_get,
         'else':'menu',
     },
     'do-post':{
-        'on_enter':on_wait_url,
+        'on_enter':on_post,
         'else':'menu',
     }
 }

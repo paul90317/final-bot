@@ -50,6 +50,8 @@ def handle_message(event):
     
     state=go_next(state,text)
     reply(enter_state(state))
+    if 'advance' not in machine['state']:
+        state=go_next(state,'')
     return 'OK'
 
 @handler.add(PostbackEvent)
