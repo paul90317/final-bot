@@ -1,0 +1,50 @@
+{
+    "user":{
+        "advance":{
+            "Longest Common Subsequence":"LCSeq",
+            "Longest Common Substring":"LCStr",
+            "Edit Distance":"ED",
+            "Edit Distance (Affine Gap)":"AFG",
+            "Main Menu":"menu"
+        }
+    },
+    "menu":{
+        "back":"user"
+    },
+    "LCSeq":{
+        "advance":{
+            "Test":"seq-test",
+            "Back":"user"
+        }
+    },
+    "seq-test":{
+        "any":"seq-x"
+    },
+    "seq-x":{
+        "any":"seq-y"
+    },
+    "seq-y":{
+        "any":"seq-out"
+    },
+    "seq-out":{
+        "back":"user"
+    },
+    "LCStr":{
+        "advance":{
+            "Test":"str-test",
+            "Back":"user"
+        }
+    },
+    "str-test":{
+        "any":"str-x"
+    },
+    "str-x":{
+        "any":"str-y"
+    },
+    "str-y":{
+        "any":"str-out"
+    },
+    "str-out":{
+        "back":"user"
+    }
+}
