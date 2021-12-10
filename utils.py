@@ -57,6 +57,7 @@ def complex_msg(filelabel):
     except:
         return TextSendMessage(text=f"jsons/{filelabel}.json can't open")
     
+    print(filelabel,mjson)
     actions=[]
     if 'buttons' in mjson:
         for button in mjson['buttons']:
@@ -74,13 +75,12 @@ def complex_msg(filelabel):
                         uri=button['argv']
                     )
                 ]
-
     return TemplateSendMessage(
-        alt_text=check_get(mjson,'alt'),
+        alt_text=check_get(mjson,'alt',''),
         template=ButtonsTemplate(
-            #thumbnail_image_url=check_get(mjson,'img_url'),
-            title=check_get(mjson,'title'),
-            text=check_get(mjson,'text'),
+            thumbnail_image_url=check_get(mjson,'img_url',''),
+            title=check_get(mjson,'title',''),
+            text=check_get(mjson,'text',''),
             actions=actions
         )
     )

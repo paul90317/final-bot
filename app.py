@@ -53,9 +53,9 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, message)
     text = event.message.text
     
-    if state[1:]=='x':
+    if state[-1:]=='x':
         x=text
-    if state[1:]=='y':
+    if state[-1:]=='y':
         y=text
     
     next=machine.advance(state,text)
@@ -64,11 +64,14 @@ def handle_message(event):
         return 'OK'
     state=next
     
-    if state[3:]=='out':
-        reply(text_msg('x'))
-        reply(text_msg('y'))
+    if state[-3:]=='out':
+        reply(text_msg(x))
+        reply(text_msg(y))
     else:
-        reply(complex_msg(state))
+        try:
+            reply(complex_msg(state))
+        except:
+            print('complex msg error!!!')
 
     if machine.go_back(state)!=None:
         state=machine.go_back(state)
