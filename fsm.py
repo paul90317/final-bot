@@ -34,6 +34,8 @@ def on_get(**obj):
     res=client.get(obj['url'])
     uid=obj['uid']
     filename=f'{uid}.html'
+    print(obj['url'])
+    print(res.text)
     with open(filename,'w')as f:
         f.write(res.text)
     return text_msg(filename)
@@ -114,4 +116,4 @@ def go_next(state,msg):
 
 def enter_state(**obj):
     global machine
-    return machine[obj['state']]['on_enter'](state=obj['state'],url=obj['url'])
+    return machine[obj['state']]['on_enter'](state=obj['state'],uid=obj['uid'],url=obj['url'])

@@ -59,6 +59,7 @@ def handle_message(event):
     try:
         reply(enter_state(
             state=state[uid],
+            uid=uid,
             url=text
         ))
     except:
