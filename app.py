@@ -44,7 +44,8 @@ state={}
 def handle_message(event):
     global state
     global machine
-    uid=event.source.userId
+    uid='as'
+    print(event.source)
     def reply(message):
         line_bot_api.reply_message(event.reply_token, message)
     text = event.message.text
