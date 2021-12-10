@@ -45,7 +45,7 @@ def handle_message(event):
     global state
     global machine
     uid='0'
-    if event.source['type']=='user':
+    if event.source.type=='user':
         uid=event.source.userId
     print(event.source)
     def reply(message):
