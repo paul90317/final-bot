@@ -64,7 +64,7 @@ def handle_message(event):
     next=machine.advance(state,text)
     if next==None:
         reply(text_msg('請輸入合法字串'))
-        return
+        return 'OK'
     state=next
     
     if state[3:]=='out':
@@ -73,13 +73,14 @@ def handle_message(event):
     else:
         reply(complex_msg(state))
 
-    while machine.go_back(state)!=None:
+    if machine.go_back(state)!=None:
         state=machine.go_back(state)
         if state[3:]=='out':
             reply(text_msg('x'))
             reply(text_msg('y'))
         else:
             reply(complex_msg(state))
+    return 'OK'
         
     
     
@@ -98,6 +99,7 @@ def welcome(event):
     name = profile.display_name
     message = TextSendMessage(text=f'{name}歡迎加入')
     line_bot_api.reply_message(event.reply_token, message)
+    return 'OK'
         
 import json
 if __name__ == "__main__":
