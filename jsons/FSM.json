@@ -1,15 +1,11 @@
 {
-    "user":{
+    "menu":{
         "advance":{
             "Longest Common Subsequence":"LCSeq",
             "Longest Common Substring":"LCStr",
             "Edit Distance":"ED",
-            "Edit Distance (Affine Gap)":"AFG",
-            "Main Menu":"menu"
+            "Edit Distance (Affine Gap)":"AFG"
         }
-    },
-    "menu":{
-        "back":"user"
     },
     "LCSeq":{
         "advance":{

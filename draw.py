@@ -37,7 +37,7 @@ for state in m:
 machine = GraphMachine(
     states=m2['states'],
     transitions=m2['transitions'],
-    initial="user",
+    initial="menu",
     auto_transitions=False,
     show_conditions=True,
 )
