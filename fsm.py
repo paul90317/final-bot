@@ -33,20 +33,20 @@ def on_wait_url(**obj):
 def on_get(**obj):
     res=client.get(obj['url'])
     uid=obj['uid']
-    filename=f'{uid}.html'
+    filename=f'temp/{uid}.html'
     print(obj['url'])
     print(res.text)
     with open(filename,'w')as f:
         f.write(res.text)
-    return text_msg(os.path.join(os.environ.get('HOST_URL',''),'temp',filename))
+    return text_msg(os.path.join(os.environ.get('HOST_URL',''),filename))
 
 def on_post(**obj):
     res=client.post(obj['url'])
     uid=obj['uid']
-    filename=f'{uid}.html'
+    filename=f'temp/{uid}.html'
     with open(filename,'w')as f:
         f.write(res.text)
-    return text_msg(os.path.join(os.environ.get('HOST_URL',''),'temp',filename))
+    return text_msg(os.path.join(os.environ.get('HOST_URL',''),filename))
 
 machine={
     "menu":{
