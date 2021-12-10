@@ -112,6 +112,6 @@ def go_next(state,msg):
             return next['next']
     return machine[state]['else']
 
-def enter_state(state):
+def enter_state(**obj):
     global machine
-    return machine[state]['on_enter'](machine,state)
+    return machine[obj['state']]['on_enter'](state=obj['state'],url=obj['url'])
