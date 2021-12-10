@@ -98,15 +98,15 @@ def welcome(event):
     line_bot_api.reply_message(event.reply_token, message)
     return 'OK'
 """
-@app.route("/", methods=['GET'])
+@app.route("/")
 def hello():
-    return send_file("fsm.png", mimetype="image/png")
+    return "Hello world"
+    #return send_file("fsm.png", mimetype="image/png")
 
 import json
 if __name__ == "__main__":
-    x=""
-    y=""
-    state="user"
+    """
     with open("jsons/FSM.json","r") as f:
         machine=myFSM(json.load(f))
+    """
     app.run()
