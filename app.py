@@ -51,10 +51,6 @@ def handle_message(event):
     state=go_next(state,text)
     reply(enter_state(state))
     return 'OK'
-        
-    
-    
-    
 
 @handler.add(PostbackEvent)
 def handle_message(event):

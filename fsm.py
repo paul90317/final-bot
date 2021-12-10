@@ -97,7 +97,7 @@ machine={
 
 def go_next(state,msg):
     global machine
-    for next in check_get(machine[state],'advance'):
+    for next in check_get(machine[state],'advance',[]):
         if next['condition'](msg)==True:
             return next['next']
     return machine[state]['else']
