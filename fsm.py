@@ -1,5 +1,3 @@
-from transitions.extensions import GraphMachine
-
 from utils import check_get
 
 class myFSM():
