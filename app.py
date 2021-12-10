@@ -47,7 +47,7 @@ def handle_message(event):
     uid='0'
     print(event.source)
     if event.source.type=='user':
-        uid=json.loads(json.dumps(event.source))['userId']
+        uid=json.loads(str(event.source))['userId']
     
     def reply(message):
         line_bot_api.reply_message(event.reply_token, message)
