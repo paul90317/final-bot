@@ -38,7 +38,7 @@ def on_get(**obj):
     print(res.text)
     with open(filename,'w')as f:
         f.write(res.text)
-    return text_msg(filename)
+    return text_msg(os.path.join(os.environ.get('HOST_URL',''),'temp',filename))
 
 def on_post(**obj):
     res=client.post(obj['url'])
@@ -46,7 +46,7 @@ def on_post(**obj):
     filename=f'{uid}.html'
     with open(filename,'w')as f:
         f.write(res.text)
-    return text_msg(os.path.join(os.environ.get('HOST_URL',''),filename))
+    return text_msg(os.path.join(os.environ.get('HOST_URL',''),'temp',filename))
 
 machine={
     "menu":{

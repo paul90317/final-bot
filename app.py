@@ -87,6 +87,10 @@ def welcome(event):
 def hello():
     return send_file("fsm.png", mimetype="image/png")
 
+@app.route('/temp/<path:filename>')
+def tempfile(filename):
+    return send_file(f'temp/{filename}')
+
 import json
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
