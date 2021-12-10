@@ -9,12 +9,9 @@
     },
     "LCSeq":{
         "advance":{
-            "Test":"seq-test",
+            "Test":"seq-x",
             "Back":"menu"
         }
-    },
-    "seq-test":{
-        "any":"seq-x"
     },
     "seq-x":{
         "any":"seq-y"
@@ -27,12 +24,9 @@
     },
     "LCStr":{
         "advance":{
-            "Test":"str-test",
+            "Test":"str-x",
             "Back":"menu"
         }
-    },
-    "str-test":{
-        "any":"str-x"
     },
     "str-x":{
         "any":"str-y"
