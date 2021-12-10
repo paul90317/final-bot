@@ -89,6 +89,8 @@ def hello():
 
 @app.route('/temp/<path:filename>',methods=['GET'])
 def tempfile(filename):
+    global tempfiles
+    print(filename[:-5])
     return tempfiles[filename[:-5]]
 
 import json
