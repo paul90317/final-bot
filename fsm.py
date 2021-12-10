@@ -1,5 +1,5 @@
 from utils import *
-import json
+import json,os
 import requests as client
 
 def is_public_ip(s):
@@ -46,7 +46,7 @@ def on_post(**obj):
     filename=f'{uid}.html'
     with open(filename,'w')as f:
         f.write(res.text)
-    return text_msg(filename)
+    return text_msg(os.path.join(os.environ.get('HOST_URL',''),filename))
 
 machine={
     "menu":{
