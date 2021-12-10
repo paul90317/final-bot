@@ -40,41 +40,16 @@ def callback():
 
 # 處理訊息
 state="menu"
-x=""
-y=""
-machine=None
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     global state
-    global x
-    global y
     global machine
     def reply(message):
         line_bot_api.reply_message(event.reply_token, message)
     text = event.message.text
     
-    if state[-1:]=='x':
-        x=text
-    if state[-1:]=='y':
-        y=text
-    
-    next=machine.advance(state,text)
-    if next==None:
-        reply(msg(state))
-        return 'OK'
-    state=next
-    
-    if state[-3:]=='out':
-        reply(text_msg(x))
-        reply(text_msg(y))
-    else:
-        try:
-            reply(msg(state))
-        except:
-            print('complex msg error!!!')
-
-    if machine.go_back(state)!=None:
-        state=machine.go_back(state)
+    state=go_next(state,text)
+    reply(enter_state(state))
     return 'OK'
         
     
@@ -102,7 +77,5 @@ def hello():
 
 import json
 if __name__ == "__main__":
-    with open("FSM.json","r") as f:
-        machine=myFSM(json.load(f))
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)

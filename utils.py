@@ -50,7 +50,7 @@ def check_get(m,k,e=None):
     return e
 
 import json
-def _complex_msg(mjson):
+def complex_msg(mjson):
     actions=[]
     if 'buttons' in mjson:
         for button in mjson['buttons']:
@@ -87,4 +87,4 @@ def msg(state):
     if mjson['type']=='text':
         return TextSendMessage(text=mjson['text'])
     elif mjson['type']=='menu':
-        return _complex_msg(mjson)
+        return complex_msg(mjson)

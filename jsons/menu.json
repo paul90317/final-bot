@@ -1,17 +1,17 @@
 {
     "type":"menu",
     "title":"主選單",
-    "text":"請選擇你要學習的演算法",
+    "text":"有甚麼需要幫忙的嗎?",
     "buttons":[
         {
             "type":"msg",
-            "label":"最大子共同序列",
-            "argv":"Longest Common Subsequence"
+            "label":"我的公共 IP",
+            "argv":"Public IP"
         },
         {
             "type":"msg",
-            "label":"最大子共同子字串",
-            "argv":"Longest Common Substring"
+            "label":"我想測試我的伺服器",
+            "argv":"Request Test"
         }
     ]
 }

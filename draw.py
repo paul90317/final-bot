@@ -1,37 +1,28 @@
 import json
 from utils import check_get
+from fsm import machine
 
 from transitions.extensions.diagrams import GraphMachine
-
-with open("FSM.json","r") as f:
-    m=json.load(f)
 
 m2={}
 m2['states']=[]
 m2['transitions']=[]
-for state in m:
+for state in machine:
     m2['states']+=[state]
     
-    for word in check_get(m[state],'advance',{}):
+    for node in check_get(machine[state],'advance',[]):
         tmp={}
         tmp['trigger']='advance'
         tmp['source']=state
-        tmp['dest']=m[state]['advance'][word]
-        tmp['conditions']=word
+        tmp['dest']=node['next']
+        tmp['conditions']=node['condition']
         m2['transitions']+=[tmp]
     
-    if 'any' in m[state]:
+    if 'else' in machine[state]:
         tmp={}
-        tmp['trigger']='any'
+        tmp['trigger']='else'
         tmp['source']=state
-        tmp['dest']=m[state]['any']
-        m2['transitions']+=[tmp]
-
-    if 'back' in m[state]:
-        tmp={}
-        tmp['trigger']='go_back'
-        tmp['source']=state
-        tmp['dest']=m[state]['back']
+        tmp['dest']=machine[state]['else']
         m2['transitions']+=[tmp]
 
 machine = GraphMachine(

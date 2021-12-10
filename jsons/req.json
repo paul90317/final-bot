@@ -1,0 +1,17 @@
+{
+    "type":"menu",
+    "title":"HTTP 請求",
+    "text":"選擇你的 HTTP 請求",
+    "buttons":[
+        {
+            "type":"msg",
+            "label":"GET",
+            "argv":"GET"
+        },
+        {
+            "type":"msg",
+            "label":"POST",
+            "argv":"POST"
+        }
+    ]
+}
