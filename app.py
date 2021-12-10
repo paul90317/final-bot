@@ -87,8 +87,9 @@ def welcome(event):
 def hello():
     return send_file("fsm.png", mimetype="image/png")
 
-@app.route('/temp/<path:filename>')
+@app.route('/temp/<path:filename>',methods=['GET'])
 def tempfile(filename):
+    print('ssssssssssssssssssssssssssssssssssssssss',filename)
     return send_file(f'temp/{filename}')
 
 import json
