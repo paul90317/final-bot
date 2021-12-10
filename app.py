@@ -39,22 +39,26 @@ def callback():
     return 'OK'
 
 # 處理訊息
-state="menu"
+state={}
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     global state
     global machine
+    uid=event.source.userId
     def reply(message):
         line_bot_api.reply_message(event.reply_token, message)
     text = event.message.text
-    
-    state=go_next(state,text)
+
+    if uid not in state:
+        state[uid]='menu'
+
+    state[uid]=go_next(state[uid],text)
     try:
-        reply(enter_state(state))
+        reply(enter_state(state[uid]))
     except:
-        print("reply error!!!")
-    if 'advance' not in machine[state]:
-        state=go_next(state,'')
+        reply(text_msg('找不到網頁'))
+    if 'advance' not in machine[state[uid]]:
+        state[uid]=go_next(state[uid],'')
     return 'OK'
 
 @handler.add(PostbackEvent)
