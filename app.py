@@ -8,7 +8,6 @@ from linebot.exceptions import (
 )
 from linebot.models import *
 from dotenv import load_dotenv
-from transitions.core import Machine
 load_dotenv()
 
 
@@ -73,7 +72,7 @@ def handle_message(event):
         reply(text_msg('y'))
     else:
         reply(complex_msg(state))
-        
+
     while machine.go_back(state)!=None:
         state=machine.go_back(state)
         if state[3:]=='out':
