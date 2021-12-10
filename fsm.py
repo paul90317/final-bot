@@ -30,21 +30,21 @@ def on_ip(**obj):
 def on_wait_url(**obj):
     return text_msg('請輸入 url:')
 
+tempfiles={}
 def on_get(**obj):
+    global tempfiles
     res=client.get(obj['url'])
     uid=obj['uid']
     filename=f'temp/{uid}.html'
-    with open(filename,'w')as f:
-        f.write(res.text)
-    print(os.path.join(os.environ.get('HOST_URL',''),filename))
+    tempfiles['uid']=res.text
     return text_msg(os.path.join(os.environ.get('HOST_URL',''),filename))
 
 def on_post(**obj):
+    global tempfiles
     res=client.post(obj['url'])
     uid=obj['uid']
     filename=f'temp/{uid}.html'
-    with open(filename,'w')as f:
-        f.write(res.text)
+    tempfiles['uid']=res.text
     return text_msg(os.path.join(os.environ.get('HOST_URL',''),filename))
 
 machine={

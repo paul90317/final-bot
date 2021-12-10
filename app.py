@@ -89,8 +89,7 @@ def hello():
 
 @app.route('/temp/<path:filename>',methods=['GET'])
 def tempfile(filename):
-    print('ssssssssssssssssssssssssssssssssssssssss',filename)
-    return send_file(f'temp/{filename}')
+    return tempfiles[filename[:-5]]
 
 import json
 if __name__ == "__main__":
