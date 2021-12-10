@@ -2,41 +2,50 @@ from utils import *
 import json
 import requests as client
 
-gurl=''
-
 def is_public_ip(s):
     return s.lower()== "public ip"
+
 def is_request(s):
-    print(s)
     return s.lower()== "request test"
+
 def is_get(s):
     return s.lower()=='get'
+
 def is_post(s):
     return s.lower()=='post'
+
 def is_url(s):
     global gurl
     gurl=s
     return True
 
-def on_json(machine,state):
-    return msg(state)
-def on_ip(machine,state):
+def on_json(**obj):
+    return msg(obj['state'])
+
+def on_ip(**obj):
     url="https://api.ipify.org/"
     res=client.get(url)
-    print(res.text)
     return text_msg(res.text)
-def on_wait_url(machine,state):
+
+def on_wait_url(**obj):
     return text_msg('請輸入 url:')
-def on_get(machine,state):
-    global gurl
-    res=client.get(gurl)
-    print(res.text)
-    return text_msg(res.text)
-def on_post(machine,state):
-    global gurl
-    res=client.post(gurl)
-    print(res.text)
-    return text_msg(res.text)
+
+def on_get(**obj):
+    res=client.get(obj['url'])
+    uid=obj['uid']
+    filename=f'{uid}.html'
+    with open(filename,'w')as f:
+        f.write(res.text)
+    return text_msg(filename)
+
+def on_post(**obj):
+    res=client.post(obj['url'])
+    uid=obj['uid']
+    filename=f'{uid}.html'
+    with open(filename,'w')as f:
+        f.write(res.text)
+    return text_msg(filename)
+
 machine={
     "menu":{
         "advance":[

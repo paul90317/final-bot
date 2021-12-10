@@ -45,7 +45,6 @@ def handle_message(event):
     global state
     global machine
     uid='0'
-    print(event.source)
     if event.source.type=='user':
         uid=json.loads(str(event.source))['userId']
     
@@ -58,7 +57,10 @@ def handle_message(event):
 
     state[uid]=go_next(state[uid],text)
     try:
-        reply(enter_state(state[uid]))
+        reply(enter_state(
+            state=state[uid],
+            url=text
+        ))
     except:
         reply(text_msg('找不到網頁'))
     if 'advance' not in machine[state[uid]]:
