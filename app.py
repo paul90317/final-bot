@@ -1,3 +1,4 @@
+
 from flask import Flask, request, abort, send_file
 
 from linebot import (
@@ -8,15 +9,14 @@ from linebot.exceptions import (
 )
 from linebot.models import *
 from dotenv import load_dotenv
-load_dotenv()
-
-
 import os
 
 from utils import *
 from fsm import *
 
 app = Flask(__name__)
+"""
+load_dotenv()
 static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
 # Channel Access Token
 line_bot_api = LineBotApi(os.getenv("LINE_CHANNEL_ACCESS_TOKEN",None))
@@ -37,9 +37,6 @@ def callback():
     except InvalidSignatureError:
         abort(400)
     return 'OK'
-@app.route("/", methods=['GET'])
-def hello():
-    return send_file("fsm.png", mimetype="image/png")
 
 # 處理訊息
 state="user"
@@ -100,7 +97,11 @@ def welcome(event):
     message = TextSendMessage(text=f'{name}歡迎加入')
     line_bot_api.reply_message(event.reply_token, message)
     return 'OK'
-        
+"""
+@app.route("/", methods=['GET'])
+def hello():
+    return send_file("fsm.png", mimetype="image/png")
+
 import json
 if __name__ == "__main__":
     x=""
