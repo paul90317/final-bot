@@ -45,9 +45,10 @@ def handle_message(event):
     global state
     global machine
     uid='0'
-    if event.source.type=='user':
-        uid=event.source.userId
     print(event.source)
+    if event.source.type=='user':
+        uid=event.source['userId']
+    
     def reply(message):
         line_bot_api.reply_message(event.reply_token, message)
     text = event.message.text
