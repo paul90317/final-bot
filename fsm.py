@@ -7,6 +7,7 @@ gurl=''
 def is_public_ip(s):
     return s.lower()== "public ip"
 def is_request(s):
+    print(s)
     return s.lower()== "request test"
 def is_get(s):
     return s.lower()=='get'
