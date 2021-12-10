@@ -50,14 +50,7 @@ def check_get(m,k,e=None):
     return e
 
 import json
-def complex_msg(filelabel):
-    try:
-        with open(f"jsons/{filelabel}.json")as f:
-            mjson=json.load(f)
-    except:
-        return TextSendMessage(text=f"jsons/{filelabel}.json can't open")
-    
-    print(filelabel,mjson)
+def _complex_msg(mjson):
     actions=[]
     if 'buttons' in mjson:
         for button in mjson['buttons']:
@@ -83,6 +76,15 @@ def complex_msg(filelabel):
             actions=actions
         )
     )
-
 def text_msg(text):
     return TextSendMessage(text=text)
+def msg(state):
+    try:
+        with open(f"jsons/{state}.json")as f:
+            mjson=json.load(f)
+    except:
+        return TextSendMessage(text=f"jsons/{state}.json can't open")
+    if mjson['type']=='text':
+        return TextSendMessage(text=mjson['text'])
+    elif mjson['type']=='menu':
+        return _complex_msg(mjson)

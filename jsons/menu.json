@@ -1,4 +1,5 @@
 {
+    "type":"menu",
     "title":"主選單",
     "text":"請選擇你要學習的演算法",
     "buttons":[
