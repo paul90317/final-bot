@@ -17,7 +17,7 @@ def is_post(s):
 def is_try_again(s):
     return s.lower()=='再試一次'
 
-re_url=re.compile('https?:\/\/([a-zA-Z0-9]+\.)*[a-zA-Z0-9]+(\/\S*)?')
+re_url=re.compile('https?:\/\/[a-zA-Z0-9\-]+(\.[a-zA-Z0-9]+)*(\/\S*)?')
 def is_url(s):
     global re_url
     return re_url.fullmatch(s)!=None
@@ -40,11 +40,10 @@ def on_refail(**obj):
     return msg('refail')
 
 tempfiles={}
-def _success_f(uid,text):
+def _success_f(uid,content):
     filename=f'temp/{uid}.html'
-    tempfiles[uid]=text
+    tempfiles[uid]=content
     path=os.path.join(os.environ.get('HOST_URL',''),filename)
-    print(path)
     return msg('crasuccess',{'uri':path})
 
 def on_get(**obj):
@@ -54,7 +53,7 @@ def on_get(**obj):
     except:
         return msg('crafail')
     
-    return _success_f(obj['uid'],res.text)
+    return _success_f(obj['uid'],res._content)
 
 def on_post(**obj):
     global tempfiles
@@ -63,7 +62,7 @@ def on_post(**obj):
     except:
         return msg('crafail')
 
-    return _success_f(obj['uid'],res.text)
+    return _success_f(obj['uid'],res._content)
 
 machine={
     "menu":{

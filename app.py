@@ -87,10 +87,14 @@ def welcome(event):
 def hello():
     return send_file("fsm.png", mimetype="image/png")
 
+import io
 @app.route('/temp/<path:filename>',methods=['GET'])
 def tempfile(filename):
     global tempfiles
-    return tempfiles[filename.split('.')[0]]
+    sp=filename.split('.')
+    key=sp[0]
+    ext=sp[1]
+    return tempfiles[key]
 
 import json
 if __name__ == "__main__":
