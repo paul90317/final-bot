@@ -1,0 +1,33 @@
+{
+    "type": "bubble",
+    "hero": {
+      "type": "image",
+      "url": "https://cdn.cloudflare.steamstatic.com/steam/apps/1126510/capsule_616x353.jpg?t=1565766736"
+    },
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "text",
+          "text": "很遺憾，我找不到你要的網頁"
+        }
+      ]
+    },
+    "footer": {
+      "type": "box",
+      "layout": "vertical",
+      "spacing": "sm",
+      "contents": [
+        {
+          "type": "button",
+          "action": {
+            "type": "message",
+            "label": "回主畫面",
+            "text": "回主畫面"
+          }
+        }
+      ],
+      "flex": 0
+    }
+  }

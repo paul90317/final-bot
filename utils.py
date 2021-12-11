@@ -12,12 +12,15 @@ def complex_msg(mjson):
 def text_msg(text):
     return TextSendMessage(text=text)
 
-def msg(state):
+def msg(state,obj={}):
     try:
         with open(f"jsons/{state}.json")as f:
-            mjson=json.load(f)
+            data=f.read()
     except:
-        return TextSendMessage(text=f"jsons/{state}.json can't open")
-    print(state)
-    print(mjson)
+        return TextSendMessage(text=f"我的創造者似乎沒有給我 state={state} 的腳本")
+
+    for k in obj:
+        data=data.replace('{'+k+'}',obj[k])
+    
+    mjson=json.loads(data)
     return complex_msg(mjson)

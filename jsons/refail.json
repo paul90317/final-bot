@@ -1,0 +1,49 @@
+{
+    "type": "bubble",
+    "hero": {
+      "type": "image",
+      "url": "https://cdn.cloudflare.steamstatic.com/steam/apps/1126510/capsule_616x353.jpg?t=1565766736"
+    },
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "text",
+          "text": "你的網址似乎是不符合網址的 "
+        },
+        {
+          "type": "text",
+          "text": "regular expression,"
+        },
+        {
+          "type": "text",
+          "text": "要再試一次嗎?"
+        }
+      ]
+    },
+    "footer": {
+      "type": "box",
+      "layout": "vertical",
+      "spacing": "sm",
+      "contents": [
+        {
+          "type": "button",
+          "action": {
+            "type": "message",
+            "label": "再試一次",
+            "text": "再試一次"
+          }
+        },
+        {
+          "type": "button",
+          "action": {
+            "type": "message",
+            "label": "不要",
+            "text": "不要"
+          }
+        }
+      ],
+      "flex": 0
+    }
+  }

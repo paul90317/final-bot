@@ -14,6 +14,9 @@ def is_get(s):
 def is_post(s):
     return s.lower()=='post'
 
+def is_try_again(s):
+    return s.lower()=='再試一次'
+
 re_url=re.compile('https?:\/\/([a-zA-Z0-9]+\.)*[a-zA-Z0-9]+(\/\S*)?')
 def is_url(s):
     global re_url
@@ -24,34 +27,43 @@ def on_json(**obj):
 
 def on_ip(**obj):
     url="https://api.ipify.org/"
-    res=client.get(url)
-    return text_msg(f'我在 {res.text} 接送你的訊息，你也可以透過 {url} 查詢你的 Public IP')
+    try:
+        res=client.get(url)
+    except:
+        return text_msg('我在人群中迷失自我...')
+    return text_msg(f'我會經過 {res.text} 接送你的訊息，你也可以透過 {url} 查詢你的 Public IP')
 
 def on_wait_url(**obj):
     return text_msg('請輸入網址')
 
+def on_refail(**obj):
+    return msg('refail')
+
 tempfiles={}
+def _success_f(uid,text):
+    filename=f'temp/{uid}.html'
+    tempfiles[uid]=text
+    path=os.path.join(os.environ.get('HOST_URL',''),filename)
+    print(path)
+    return msg('crasuccess',{'uri':path})
+
 def on_get(**obj):
     global tempfiles
     try:
         res=client.get(obj['url'])
     except:
-        return text_msg('找不到網頁')
-    uid=obj['uid']
-    filename=f'temp/{uid}.html'
-    tempfiles[uid]=res.text
-    return text_msg(os.path.join(os.environ.get('HOST_URL',''),filename))
+        return msg('crafail')
+    
+    return _success_f(obj['uid'],res.text)
 
 def on_post(**obj):
     global tempfiles
     try:
         res=client.post(obj['url'])
     except:
-        return text_msg('找不到網頁')
-    uid=obj['uid']
-    filename=f'temp/{uid}.html'
-    tempfiles[uid]=res.text
-    return text_msg(os.path.join(os.environ.get('HOST_URL',''),filename))
+        return msg('crafail')
+
+    return _success_f(obj['uid'],res.text)
 
 machine={
     "menu":{
@@ -91,7 +103,7 @@ machine={
             'next':'do-get',
             'condition':is_url
         }],
-        'else':'menu',
+        'else':'refail-get',
         'on_enter':on_wait_url
     },
     "post":{
@@ -99,8 +111,24 @@ machine={
             'next':'do-post',
             'condition':is_url
         }],
-        'else':'menu',
+        'else':'refail-post',
         'on_enter':on_wait_url
+    },
+    'refail-get':{
+        'on_enter':on_refail,
+        'advance':[{
+            'next':'get',
+            'condition':is_try_again
+        }],
+        'else':'menu'
+    },
+    'refail-post':{
+        'on_enter':on_refail,
+        'advance':[{
+            'next':'post',
+            'condition':is_try_again
+        }],
+        'else':'menu'
     },
     'do-get':{
         'on_enter':on_get,
