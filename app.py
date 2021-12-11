@@ -54,7 +54,8 @@ def handle_message(event):
 
     if uid not in state:
         state[uid]='menu'
-
+    if state[uid] not in machine:
+        state[uid]='menu'
 
     state[uid]=go_next(state[uid],text)
     reply(enter_state(
