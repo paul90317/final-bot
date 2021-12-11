@@ -1,17 +1,39 @@
 {
-    "type":"menu",
-    "title":"HTTP 請求",
-    "text":"選擇你的 HTTP 請求",
-    "buttons":[
+    "type": "bubble",
+    "hero": {
+      "type": "image",
+      "url": "https://leiadot.github.io/img/cover/http.png"
+    },
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
         {
-            "type":"msg",
-            "label":"GET",
-            "argv":"GET"
+          "type": "text",
+          "text": "請輸入你的請求方式"
+        }
+      ]
+    },
+    "footer": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "button",
+          "action": {
+            "type": "message",
+            "label": "GET",
+            "text": "GET"
+          }
         },
         {
-            "type":"msg",
-            "label":"POST",
-            "argv":"POST"
+          "type": "button",
+          "action": {
+            "type": "message",
+            "label": "POST",
+            "text": "POST"
+          }
         }
-    ]
-}
+      ]
+    }
+  }

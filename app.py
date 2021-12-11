@@ -55,17 +55,17 @@ def handle_message(event):
     if uid not in state:
         state[uid]='menu'
 
+
     state[uid]=go_next(state[uid],text)
-    try:
-        reply(enter_state(
-            state=state[uid],
-            uid=uid,
-            url=text
-        ))
-    except:
-        reply(text_msg('找不到網頁'))
+    reply(enter_state(
+        state=state[uid],
+        uid=uid,
+        url=text
+    ))
+
     if 'advance' not in machine[state[uid]]:
         state[uid]=go_next(state[uid],'')
+        
     return 'OK'
 
 @handler.add(PostbackEvent)
@@ -90,13 +90,9 @@ def hello():
 @app.route('/temp/<path:filename>',methods=['GET'])
 def tempfile(filename):
     global tempfiles
-    print(filename[:-5])
-    return tempfiles[filename[:-5]]
+    return tempfiles[filename.split('.')[0]]
 
 import json
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
-    os.mkdir('temp')
-    for k in os.environ:
-        print(k,os.environ[k],sep=" = ")
     app.run(host='0.0.0.0', port=port)

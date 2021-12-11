@@ -1,5 +1,5 @@
 from utils import *
-import json,os
+import json,os,re
 import requests as client
 
 def is_public_ip(s):
@@ -14,10 +14,10 @@ def is_get(s):
 def is_post(s):
     return s.lower()=='post'
 
+re_url=re.compile('https?:\/\/([a-zA-Z0-9]+\.)*[a-zA-Z0-9]+(\/\S*)?')
 def is_url(s):
-    global gurl
-    gurl=s
-    return True
+    global re_url
+    return re_url.fullmatch(s)!=None
 
 def on_json(**obj):
     return msg(obj['state'])
@@ -25,15 +25,18 @@ def on_json(**obj):
 def on_ip(**obj):
     url="https://api.ipify.org/"
     res=client.get(url)
-    return text_msg(res.text)
+    return text_msg(f'我在 {res.text} 接送你的訊息，你也可以透過 {url} 查詢你的 Public IP')
 
 def on_wait_url(**obj):
-    return text_msg('請輸入 url:')
+    return text_msg('請輸入網址')
 
 tempfiles={}
 def on_get(**obj):
     global tempfiles
-    res=client.get(obj['url'])
+    try:
+        res=client.get(obj['url'])
+    except:
+        return text_msg('找不到網頁')
     uid=obj['uid']
     filename=f'temp/{uid}.html'
     tempfiles[uid]=res.text
@@ -41,7 +44,10 @@ def on_get(**obj):
 
 def on_post(**obj):
     global tempfiles
-    res=client.post(obj['url'])
+    try:
+        res=client.post(obj['url'])
+    except:
+        return text_msg('找不到網頁')
     uid=obj['uid']
     filename=f'temp/{uid}.html'
     tempfiles[uid]=res.text

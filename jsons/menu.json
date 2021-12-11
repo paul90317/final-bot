@@ -1,17 +1,47 @@
 {
-    "type":"menu",
-    "title":"主選單",
-    "text":"有甚麼需要幫忙的嗎?",
-    "buttons":[
-        {
-            "type":"msg",
-            "label":"我的公共 IP",
-            "argv":"Public IP"
+    "type": "carousel",
+    "contents": [
+      {
+        "type": "bubble",
+        "hero": {
+          "type": "image",
+          "url": "https://146a55aca6f00848c565-a7635525d40ac1c70300198708936b4e.ssl.cf1.rackcdn.com/images/ef6ba9d6e54f13861a0cb406962b00ed17670956.png"
         },
-        {
-            "type":"msg",
-            "label":"我想測試我的伺服器",
-            "argv":"Request Test"
+        "footer": {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "button",
+              "action": {
+                "type": "message",
+                "label": "我想測試伺服器",
+                "text": "Request Test"
+              }
+            }
+          ]
         }
+      },
+      {
+        "type": "bubble",
+        "hero": {
+          "type": "image",
+          "url": "https://www.elegantthemes.com/blog/wp-content/uploads/2020/03/what-is-an-ip-address-featured-image.jpg"
+        },
+        "body": {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "button",
+              "action": {
+                "type": "message",
+                "label": "我想知道你在哪裡",
+                "text": "Public IP"
+              }
+            }
+          ]
+        }
+      }
     ]
-}
+  }
