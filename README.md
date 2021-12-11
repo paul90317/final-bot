@@ -1,5 +1,9 @@
 # TOC Project 2020
 **伺服器測試機器人**
+Line ID: @866jaryx
+QR code:
+![qrc](imgs/qrc.png)
+[heroku FSM](https://asd4f5a.herokuapp.com/)
 ## 啟發
 這個機器人的主題是小工具，主要是因為，當我們使用自己寫的 server 使用到 GET 以外的 HTTP Request method (像是 POST) 可能比較難 debug，所以我這裡提供一種方法，讓我們能使用聊天機器人幫你測試。
 
