@@ -43,12 +43,12 @@ def callback():
 **抓 facebook**  
 ![5](imgs/5.png)  
 
-1. 可以看到有些地方沒有畫面，是因為爬蟲沒辦法抓 local dependence(像 css 檔，抓到的檔案 fetch 也沒辦法用)。  
-2. facebook 顯示登入畫面是因為爬蟲就像是沒有登入的使用者，除非有給 header。  
+* 可以看到有些地方沒有畫面，是因為爬蟲沒辦法抓 local dependence(像 css 檔，抓到的檔案 fetch 也沒辦法用)。  
+* facebook 顯示登入畫面是因為爬蟲就像是沒有登入的使用者，除非有給 header。  
 
 ## 難點克服
 1. **傳送檔案太大**  
-我的程式主要是用來測試，所以爬蟲抓到的資料希望可以完整地交給 client，但訊息大小有上限，所以使用 firebase realtime database 存放抓到的檔案，不同 user 根據 uid 有不同的 path ，那些就是他們的暫存區，當機器成功抓好網頁後會有超連結可以查看抓到甚麼。    
+我的程式主要是用來測試，所以爬蟲抓到的資料希望可以完整地交給 client，但訊息大小有上限，所以使用 [firebase realtime database](db.py) 存放抓到的檔案，不同 user 根據 uid 有不同的 path ，那些就是他們的暫存區，當機器成功抓好網頁後會有超連結可以查看抓到甚麼。    
 **超連結格式:** `https://[linebot 所在域名]/temp/[sha256 user's uid].html`  
 ![1](imgs/1.png)  
 2. **heroku 無法安裝 graphviz**  
@@ -78,4 +78,11 @@ regular expresston 擋掉非法網址(ex. 域名有 + 號)
 第二部分表示域名，大小寫數字皆有(我規定的)，子域名一定要有，子域名接受 `-`，  
 第三部分代表 path, `/` 可有可無，`/` 後 path `\S` 接受所有字元。  
 ## 同時服務多個 client
-每個 client 有各自的 uid，以 uid 的 sha256 當 key，用 firebase realtime database 儲存使用者的 state，實現多使用者同時與 linebot 聊天，state 不衝突。
+每個 client 有各自的 uid，以 uid 的 sha256 當 key，用 [firebase realtime database](db.py) 儲存使用者的 state，實現多使用者同時與 linebot 聊天，state 不衝突。
+## database and deploy
+![database](imgs/database.png)  
+* 使用 heroku 當 server  
+https://asd4f5a.herokuapp.com/  
+* 使用 firebase realtime database 當 database  
+https://console.firebase.google.com/project/linebot-temp/database/linebot-temp-default-rtdb/data  
+![data](imgs/data.png)

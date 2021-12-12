@@ -15,12 +15,12 @@ firebase_admin.initialize_app(cred,{
 def mhash(m):
     return sha256(bytes(m, 'utf-8')).hexdigest()
 
-def setdb(uid,key,val):
-    ref=db.reference(f'/{uid}/{key}')
+def setdb(cuid,key,val):
+    ref=db.reference(f'/{cuid}/{key}')
     ref.set(val)
 
-def getdb(uid,key):
-    ref=db.reference(f'/{uid}/{key}')
+def getdb(cuid,key):
+    ref=db.reference(f'/{cuid}/{key}')
     return ref.get()
 
 print('hello')
