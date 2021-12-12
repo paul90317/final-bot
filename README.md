@@ -82,7 +82,13 @@ regular expresston 擋掉非法網址(ex. 域名有 + 號)
 ## database and deploy
 ![database](imgs/database.png)  
 * 使用 heroku 當 server  
-https://asd4f5a.herokuapp.com/  
+HOST_URL= https://asd4f5a.herokuapp.com/  
 * 使用 firebase realtime database 當 database  
-https://console.firebase.google.com/project/linebot-temp/database/linebot-temp-default-rtdb/data  
+DB_URL= [readtime database -> 資料 -> 底下圖片上面的網址]  
 ![data](imgs/data.png)
+### how to deploy  
+基本上 clone 下來就可以 deploy 了，但要先設定 heroku 環境變數，如下:  
+![var](imgs/var.png)  
+DB_KEY 是 firebase 私密金鑰，取得方式是  
+先進專案->設定圖標->專案設定->服務帳戶->產生新的私密金鑰  
+檔案裡的內容就是了
