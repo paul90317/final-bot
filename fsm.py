@@ -1,6 +1,7 @@
 from utils import *
 import json,os,re
 import requests as client
+from db import *
 
 def is_public_ip(s):
     return s.lower()== "public ip"
@@ -40,29 +41,27 @@ def on_refail(**obj):
     return msg('refail')
 
 tempfiles={}
-def _success_f(uid,content):
-    filename=f'temp/{uid}.html'
-    tempfiles[uid]=content
+def _success_f(cuid,content):
+    filename=f'temp/{cuid}.html'
+    setdb(cuid,'content',content)
     path=os.path.join(os.environ.get('HOST_URL',''),filename)
     return msg('crasuccess',{'uri':path})
 
 def on_get(**obj):
-    global tempfiles
     try:
         res=client.get(obj['url'])
     except:
         return msg('crafail')
     
-    return _success_f(obj['uid'],res._content)
+    return _success_f(obj['cuid'],res._content)
 
 def on_post(**obj):
-    global tempfiles
     try:
         res=client.post(obj['url'])
     except:
         return msg('crafail')
 
-    return _success_f(obj['uid'],res._content)
+    return _success_f(obj['cuid'],res._content)
 
 machine={
     "menu":{
@@ -148,4 +147,4 @@ def go_next(state,msg):
 
 def enter_state(**obj):
     global machine
-    return machine[obj['state']]['on_enter'](state=obj['state'],uid=obj['uid'],url=obj['url'])
+    return machine[obj['state']]['on_enter'](state=obj['state'],cuid=obj['cuid'],url=obj['url'])

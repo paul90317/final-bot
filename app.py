@@ -10,7 +10,7 @@ from linebot.exceptions import (
 from linebot.models import *
 from dotenv import load_dotenv
 import os
-
+from db import *
 from utils import *
 from fsm import *
 
@@ -52,21 +52,23 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, message)
     text = event.message.text
 
-    if uid not in state:
-        state[uid]='menu'
-    if state[uid] not in machine:
-        state[uid]='menu'
+    cuid=mhash(uid)
+    state=getdb(cuid,'state')
+    if state==None:
+        state='menu'
 
-    state[uid]=go_next(state[uid],text)
+    state=go_next(state,text)
     reply(enter_state(
-        state=state[uid],
-        uid=uid,
+        state=state,
+        cuid=cuid,
         url=text
     ))
 
-    if 'advance' not in machine[state[uid]]:
-        state[uid]=go_next(state[uid],'')
-        
+    if 'advance' not in machine[state]:
+        state=go_next(state,'')
+    
+    setdb(cuid,'state',state)
+
     return 'OK'
 
 @handler.add(PostbackEvent)
@@ -91,11 +93,8 @@ def hello():
 import io
 @app.route('/temp/<path:filename>',methods=['GET'])
 def tempfile(filename):
-    global tempfiles
-    sp=filename.split('.')
-    key=sp[0]
-    ext=sp[1]
-    return tempfiles[key]
+    cuid=filename.split('.')[0]
+    return getdb(cuid,'content')
 
 import json
 if __name__ == "__main__":
