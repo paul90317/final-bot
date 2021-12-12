@@ -40,7 +40,6 @@ def on_wait_url(**obj):
 def on_refail(**obj):
     return msg('refail')
 
-tempfiles={}
 def _success_f(cuid,content):
     filename=f'temp/{cuid}.html'
     setdb(cuid,'content',content)
@@ -53,7 +52,7 @@ def on_get(**obj):
     except:
         return msg('crafail')
     
-    return _success_f(obj['cuid'],res._content)
+    return _success_f(obj['cuid'],res.text)
 
 def on_post(**obj):
     try:
@@ -61,7 +60,7 @@ def on_post(**obj):
     except:
         return msg('crafail')
 
-    return _success_f(obj['cuid'],res._content)
+    return _success_f(obj['cuid'],res.text)
 
 machine={
     "menu":{

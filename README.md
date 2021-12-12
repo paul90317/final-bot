@@ -49,7 +49,7 @@ def callback():
 ## 難點克服
 1. **傳送檔案太大**  
 我的程式主要是用來測試，所以爬蟲抓到的資料希望可以完整地交給 client，但訊息大小有上限，所以使用 firebase realtime database 存放抓到的檔案，不同 user 根據 uid 有不同的 path ，那些就是他們的暫存區，當機器成功抓好網頁後會有超連結可以查看抓到甚麼。    
-**超連結格式:** `https://[linebot 所在域名]/temp/[uid].html`  
+**超連結格式:** `https://[linebot 所在域名]/temp/[sha256 user's uid].html`  
 ![1](imgs/1.png)  
 2. **heroku 無法安裝 graphviz**  
 另外我的圖是 [draw.py](draw.py) 畫出來的，因為 heroku 似乎沒辦法安裝 graphviz 就算用了去年的方法，[環境](./Pipfile) 要分一下 ，dev-packages 是可畫圖的，而 packages 是推 heroku，而我的狀態機是採用 [構想](#構想) 的方法，寫在 [fsm.py](fsm.py) 裡  
@@ -78,4 +78,4 @@ regular expresston 擋掉非法網址(ex. 域名有 + 號)
 第二部分表示域名，大小寫數字皆有(我規定的)，子域名一定要有，子域名接受 `-`，  
 第三部分代表 path, `/` 可有可無，`/` 後 path `\S` 接受所有字元。  
 ## 同時服務多個 client
-每個 client 有各自的 uid，以 uid 當 key，用 firebase realtime database 儲存使用者的 state，實現多使用者同時與 linebot 聊天，state 不衝突。
+每個 client 有各自的 uid，以 uid 的 sha256 當 key，用 firebase realtime database 儲存使用者的 state，實現多使用者同時與 linebot 聊天，state 不衝突。
