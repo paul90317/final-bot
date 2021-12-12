@@ -16,10 +16,8 @@ def mhash(m):
     return sha256(bytes(m, 'utf-8')).hexdigest()
 
 def setdb(uid,key,val):
-    ref=db.reference(f'/{uid}')
-    ref.set({
-        key:val
-    })
+    ref=db.reference(f'/{uid}/{key}')
+    ref.set(val)
 
 def getdb(uid,key):
     ref=db.reference(f'/{uid}/{key}')
