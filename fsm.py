@@ -42,7 +42,7 @@ def on_refail(**obj):
 
 def _success_f(cuid,content):
     filename=f'temp/{cuid}.html'
-    setdb(cuid,'content',content)
+    setdb(cuid,'content',content.slice(0,100))
     path=os.path.join(os.environ.get('HOST_URL',''),filename)
     return msg('crasuccess',{'uri':path})
 
