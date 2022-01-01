@@ -86,11 +86,11 @@ def welcome(event):
     line_bot_api.reply_message(event.reply_token, message)
     return 'OK'
 
-@app.get("/")
+@app.route("/",methods=['GET'])
 def hello():
     return send_file("fsm.png", mimetype="image/png")
 
-@app.post("/")
+@app.route("/",methods=['POST'])
 def hellop():
     return "You give me post request, so I say hello to you."
 
