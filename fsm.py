@@ -139,6 +139,8 @@ machine={
 
 def go_next(state,msg):
     global machine
+    if state not in machine:
+        return 'menu' 
     for next in check_get(machine[state],'advance',[]):
         if next['condition'](msg)==True:
             return next['next']
