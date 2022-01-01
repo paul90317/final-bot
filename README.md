@@ -67,7 +67,7 @@ regular expression 擋掉非法網址(ex. 域名有 + 號)
 第三部分代表 path, `/` 可有可無，`/` 後 path `\S` 接受所有字元。  
 ## 同時服務多個 client
 每個 client 有各自的 uid，以 uid 的 sha256 當 key，用 [firebase realtime database](db.py) 儲存使用者的 state，實現多使用者同時與 linebot 聊天，state 不衝突。  
-由於使用了 database，所以狀態不會因 heroku 睡著而消失。
+由於使用了 database，所以狀態不會因 heroku 睡著而消失。  
 ## database and deploy
 ![database](imgs/database.png)  
 * 使用 heroku 當 server  

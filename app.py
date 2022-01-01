@@ -39,10 +39,8 @@ def callback():
     return 'OK'
 
 # 處理訊息
-state={}
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    global state
     global machine
     uid='0'
     if event.source.type=='user':
