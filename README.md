@@ -5,7 +5,7 @@ QR code:
 ![qrc](imgs/qrc.png)  
 [heroku FSM](https://asd4f5a.herokuapp.com/)  
 ## 啟發
-這個機器人的主題是小工具，主要是因為，當我們使用自己寫的 server 使用到 GET 以外的 HTTP Request method (像是 POST) 可能比較難 debug，所以我這裡提供一種方法，讓我們能使用聊天機器人幫你測試。  
+這個機器人的主題是 **小工具**，主要是因為，當我們使用自己寫的 server 使用到 GET 以外的 HTTP Request method (像是 POST) 可能比較難 debug，所以我這裡提供一種方法，讓我們能使用聊天機器人幫你測試。  
 
 ## 構想
 首先這次作業規定使用 FSM,相信是為了符合計算理論的主題，根據 [維基百科](https://zh.wikipedia.org/wiki/%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA) 的定義(如圖)，  
@@ -17,25 +17,13 @@ QR code:
 ![FSM](/fsm.png)  
 > 如果下一 state 只有 else transition 會再跳下一個 state，類似 lambda transition
 ## 實際測試
-本次作業剛好就會有 POST method 我們可以看一下收到了什麼  
-![1](imgs/1.png)  
-![2](imgs/2.png)  
-這個是因為程式碼把沒有 `X-Line-Signature` header 的 request 擋掉，所以 flask 顯示錯誤訊息。  
-```py
-@app.route("/callback", methods=['POST'])
-def callback():
-    # get X-Line-Signature header value
-    signature = request.headers['X-Line-Signature']
-    # get request body as text
-    body = request.get_data(as_text=True)
-    app.logger.info("Request body: " + body)
-    # handle webhook body
-    try:
-        handler.handle(body, signature)
-    except InvalidSignatureError:
-        abort(400)
-    return 'OK'
-```
+我們先測試 post 請求
+![p1](imgs/post/1.png)  
+![p2](imgs/post/2.png)  
+![p3](imgs/post/3.png)  
+點擊 "立即查看"  
+![res](imgs/post/res.png)  
+如果是用 GET method，只會拿到 fsm.png，也就是說如果你只是把網址打到瀏覽器，根本無法測試 POST method，而本 linebot 很好的解決此問題。  
 **抓 youtube**  
 ![3](imgs/3.png)  
 ![4](imgs/4.png)  
@@ -61,7 +49,7 @@ def callback():
 測試伺服器，輸入請求  
 ![8](imgs/8.png)  
 ![9](imgs/9.png)  
-regular expresston 擋掉非法網址(ex. 域名有 + 號)  
+regular expression 擋掉非法網址(ex. 域名有 + 號)  
 ![10](imgs/10.png)  
 輸入翻譯的網站當測試  
 ![11](imgs/11.png)  
@@ -86,7 +74,7 @@ HOST_URL= https://asd4f5a.herokuapp.com/
 * 使用 firebase realtime database 當 database  
 DB_URL= [readtime database -> 資料 -> 底下圖片上面的網址]  
 ![data](imgs/data.png)
-### how to deploy  
+## how to deploy  
 基本上 clone 下來就可以 deploy 了，但要先設定 heroku 環境變數，如下:  
 ![var](imgs/var.png)  
 DB_KEY 是 firebase 私密金鑰，取得方式是  
