@@ -86,9 +86,13 @@ def welcome(event):
     line_bot_api.reply_message(event.reply_token, message)
     return 'OK'
 
-@app.route("/")
+@app.get("/")
 def hello():
     return send_file("fsm.png", mimetype="image/png")
+
+@app.post("/")
+def hellop():
+    return "You give me post request, so I say hello to you."
 
 import io
 @app.route('/temp/<path:filename>',methods=['GET'])
