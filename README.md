@@ -81,3 +81,57 @@ DB_URL= [readtime database -> 資料 -> 底下圖片上面的網址]
 DB_KEY 是 firebase 私密金鑰，取得方式是  
 先進專案->設定圖標->專案設定->服務帳戶->產生新的私密金鑰  
 檔案裡的內容就是了
+
+## how to build local
+**Step 1: clone 與環境變數**  
+環境: window10 wsl python3.6  
+首先開一個 wsl terrminal，然後輸入以下命令  
+```wsl
+git clone git@github.com:paul90317/final-bot.git
+cd final-bot
+vim .env
+```
+開始編輯環境變數，有哪些變數?
+```env
+LINE_CHANNEL_SECRET=...
+LINE_CHANNEL_ACCESS_TOKEN=...
+HOST_URL=...
+DB_KEY=...
+DB_URL=...
+```
+LINE_CHANNEL_SECRET 在你的 line platform 的 console 裡點擊 [Basic settings] -> [Channel secret]。  
+LINE_CHANNEL_ACCESS_TOKEN 在 [Messaging API] -> [Channel access token]。  
+HOST_URL 請輸入你的 Server 的跟路徑，待會會提到。  
+DB_KEY, DB_URL 去 firebase 建立自己的 realtime database，詳情看 [前一段](## how to deploy)。  
+  
+**Step 2: Line Platform**  
+用好後記得將 "[HOST_URL]/callback" 輸入 [Messaging API] -> [Webhook URL]。  
+  
+**Step 3: pipenv**  
+python version: 3.6  
+編輯完 .env 後，繼續輸入以下命令。  
+```wsl
+pipenv check
+pipenv install --dev
+pipenv shell
+```
+python 環境建立完成  
+  
+**Step 4: 畫 FSM 圖**  
+```wsl
+python draw.py
+```
+檔案輸出在 [fsm.png](./fsm.png)  
+  
+**Step 5: 啟動 server**  
+輸入以下命令  
+```wsl
+python app.py
+```
+接者你會看到他監聽哪個 port(通常 5000)。  
+接著再打開另一個終端機輸入  
+```wsl
+ngrok http 5000
+```
+該命令會在你 5000 打開一個公共開口，讓 line plat form 可以找到你的 server。  
+你應該會看到 Forwarding 有個 https 網址，該網址就是 HOST_URL，用這個 HOST_URL 去完成 **Step 2, 3**，網路通了，就能加該機器人好友，開始聊天。  
