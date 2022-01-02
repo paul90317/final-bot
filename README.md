@@ -135,3 +135,23 @@ ngrok http 5000
 ```
 該命令會在你 5000 打開一個公共開口，讓 line plat form 可以找到你的 server。  
 你應該會看到 Forwarding 有個 https 網址，該網址就是 HOST_URL，用這個 HOST_URL 去完成 **Step 2, 3**，網路通了，就能加該機器人好友，開始聊天。  
+## Grading
+**Basic**  
+* Able to show or generate FSM Diagram  
+* Bot running properly  
+* At least 3 states for FSM  
+  
+**Functionality**  
+1. State complexity (對於輸入網址的處裡)  
+2. CRU (database 暫存爬蟲抓取的結果、user state))  
+3. Parsing (網址的 regular expression)  
+  
+**Creativity**  
+* Tools(類似 postman 的網站測試工具)    
+  
+**Bonus**  
+* Deploy  
+1. image  
+2. web crawling (測試網站、查詢 IP)  
+3. binding database (firebase realtime database)  
+4. others (再傳送網址時有特別將 uid hash)
