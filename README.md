@@ -5,19 +5,19 @@ QR code:
 ![qrc](imgs/qrc.png)  
 [heroku FSM](https://asd4f5a.herokuapp.com/)  
 ## 啟發
-這個機器人的主題是 **小工具**，主要是因為，當我們使用自己寫的 server 使用到 GET 以外的 HTTP Request method (像是 POST) 可能比較難 debug，所以我這裡提供一種方法，讓我們能使用聊天機器人幫你測試。  
+這個機器人的主題是 **小工具**，主要是因為，當我們使用自己寫的 server 使用到 GET 以外的 HTTP Request method (像是 POST) 可能比較難 debug，所以我這裡提供一種方法，讓我們能使用聊天機器人幫你測試(類似 postman)。  
 
 ## 構想
 首先這次作業規定使用 FSM,相信是為了符合計算理論的主題，根據 [維基百科](https://zh.wikipedia.org/wiki/%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA) 的定義(如圖)，  
 ![FSM 邏輯圖](https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Finite_State_Machine_Logic.svg/800px-Finite_State_Machine_Logic.svg.png)  
-我們只能使用上一狀態的 input，產生 output，這代表如果我們把 網址 當 input ,method 當 state，就沒地方放request header, body等等的東西了，但好在這個 linebot 只是要 debug。  
+我們只能使用上一狀態的 input，產生 output，這代表如果我們把 網址 當 input ,method 當 state，就沒地方放request header, body等等的東西了，但好在這個 linebot 只是要簡單 debug。  
 因為 heroku 不知為何無法安裝 `transitions`，所以自己做(山不轉路轉)，好在 python 有類似 function pointer 的功能，做起來部會太難。  
 ## FSM
 因為開發(本地)環境沒問題，所以圖是用 `GraphMachine` 畫的  
 ![FSM](/fsm.png)  
 > 如果下一 state 只有 else transition 會再跳下一個 state，類似 lambda transition
 ## 實際測試
-我們先測試 post 請求
+我們先測試 post 請求  
 ![p1](imgs/post/1.png)  
 ![p2](imgs/post/2.png)  
 ![p3](imgs/post/3.png)  
